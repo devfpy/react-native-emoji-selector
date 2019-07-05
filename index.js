@@ -251,16 +251,29 @@ export default class EmojiSelector extends Component {
   //  LIFECYCLE METHODS
   //
   componentDidMount() {
-    const { category, showHistory } = this.props;
+    const { category } = this.props;
     this.setState({ category });
 
-    if (showHistory) {
-      this.loadHistoryAsync();
-    }      
+//     if (showHistory) {
+//       this.loadHistoryAsync();
+//     }      
     
-    this.prerenderEmojis(() => {
-      this.setState({ isReady: true })
-    });
+//     this.prerenderEmojis(() => {
+//       this.setState({ isReady: true })
+//     });
+  }
+
+loadEmojiData = ()=>{
+    if(!this.state.isReady){
+      const { showHistory } = this.props;
+      if (showHistory) {
+        this.loadHistoryAsync();
+      }  
+  
+      this.prerenderEmojis(() => {
+        this.setState({ isReady: true })
+      });
+    }
   }
 
   render() {
